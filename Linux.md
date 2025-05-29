@@ -169,10 +169,111 @@ vi /etc/security/limits.d/99-custom.conf
 cat /proc/<pid>/limits
 ```
 
+## `systemctl` 및 systemd
 
+systemctl은 systemd 시스템 및 서비스 관리자로, Linux 시스템에서 서비스(데몬) 시작/중지/재시작, 부팅 시 자동 실행 설정, 시스템 상태 확인, 로그 관리, 시스템 재부팅 등 다양한 작업을 수행할 수 있는 명령어입니다.
+RHEL 7 이상, Ubuntu 16.04 이상, CentOS 7 이상 등 대부분의 최신 리눅스에서 init 시스템을 대체합니다.
 
+### 기본 명령 구조
 
+```
+systemctl [옵션] [명령] [서비스명/타겟]
+systemctl start nginx.service
+```
 
+### 서비스 제어 명령어
+
+| 명령           | 설명                       |
+| ------------ | ------------------------ |
+| `start`      | 서비스 시작                   |
+| `stop`       | 서비스 중지                   |
+| `restart`    | 서비스 재시작                  |
+| `reload`     | 설정 다시 읽기 (프로세스 재시작 없이)   |
+| `status`     | 현재 상태 확인                 |
+| `enable`     | 부팅 시 자동 시작 설정            |
+| `disable`    | 부팅 시 자동 시작 해제            |
+| `is-active`  | 현재 실행 여부 확인              |
+| `is-enabled` | 부팅 시 자동 시작 여부 확인         |
+| `mask`       | 서비스 실행 자체를 막음 (start 불가) |
+| `unmask`     | mask 해제                  |
+
+### 예제
+
+```
+# nginx 시작
+sudo systemctl start nginx
+
+# nginx 상태 확인
+systemctl status nginx
+
+# nginx 재시작
+sudo systemctl restart nginx
+
+# nginx 부팅시 자동 시작
+sudo systemctl enable nginx
+
+# 부팅시 자동 시작 해제
+sudo systemctl disable nginx
+```
+
+### 서비스 단위 파일 (Unit File)
+
+서비스 정의 파일 경로:
+* `/etc/systemd/system/` : 사용자 정의
+* `/lib/systemd/system/` 또는 `/usr/lib/systemd/system/` : 패키지 제공
+* `/run/systemd/system/` : 런타임 생성
+
+### 서비스 파일을 수정한 후 적용
+
+```
+systemctl daemon-reload
+```
+
+### 서비스 목록 보기
+
+```
+systemctl list-units --type=service --all
+systemctl --type=service
+systemctl | grep ssh
+```
+
+### 서비스 로그 확인
+
+```
+journalctl -u nginx         # nginx 서비스 전체 로그
+journalctl -u nginx -b      # 현재 부팅 이후 로그
+journalctl -u nginx --since "1 hour ago"
+```
+
+실시간으로 확인하는 방법
+
+```
+journalctl -u nginx -f
+```
+
+### 시스템 자체 제어
+
+| 명령          | 설명      |
+| ----------- | ------- |
+| `reboot`    | 시스템 재부팅 |
+| `poweroff`  | 시스템 종료  |
+| `halt`      | 시스템 중지  |
+| `suspend`   | 절전 모드   |
+| `hibernate` | 하이버네이션  |
+
+```
+sudo systemctl reboot
+```
+
+### 유용한 옵션 요약
+
+| 명령어                          | 설명                   |
+| ---------------------------- | -------------------- |
+| `systemctl list-unit-files`  | 모든 서비스의 활성/비활성 상태 보기 |
+| `systemctl is-active <서비스>`  | 실행 중인지 확인            |
+| `systemctl is-enabled <서비스>` | 부팅 시 시작 여부 확인        |
+| `systemctl show <서비스>`       | 내부 설정 정보 보기          |
+| `systemctl cat <서비스>`        | 단위 파일 내용 보기          |
 
 
 
