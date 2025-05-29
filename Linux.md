@@ -275,6 +275,46 @@ sudo systemctl reboot
 | `systemctl show <서비스>`       | 내부 설정 정보 보기          |
 | `systemctl cat <서비스>`        | 단위 파일 내용 보기          |
 
+### 참고용 서비스 파일
 
+#### Spring Boot Application
 
+```
+[Unit]
+Description=Spring Boot Application - myapp
+After=network.target
+
+[Service]
+User=springuser
+ExecStart=/usr/bin/java -jar /opt/myapp/myapp.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/var/log/myapp.log
+StandardError=append:/var/log/myapp.log
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Python Application
+
+```
+[Unit]
+Description=Python App - pyapp
+After=network.target
+
+[Service]
+User=pyuser
+WorkingDirectory=/opt/pyapp
+ExecStart=/opt/pyapp/venv/bin/python /opt/pyapp/main.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/var/log/pyapp.log
+StandardError=append:/var/log/pyapp.log
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target
+```
 
