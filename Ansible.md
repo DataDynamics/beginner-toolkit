@@ -1,5 +1,8 @@
 # Ansible
 
+* 다수의 서버를 작업해야 할 때 도움을 주는 자동화 도구
+* SSH 접속이 가능해야 함
+
 ## Concept
 
 * Inventory - 관리할 호스트 목록 정의 (/etc/ansible/hosts, 동적 inventory 가능)
@@ -63,3 +66,16 @@ db01 ansible_host=192.168.1.201 ansible_port=2222 ansible_user=postgres
 * `ansible_ssh_private_key_file` - 접속에 사용할 private key 경로
 * `ansible_become` - root 권한 상승 여부 (`yes` 또는 `true`)
 * `ansible_python_interpreter` - python 경로 명시 (e.g., `/usr/bin/python3`)
+
+### 자주 사용하는 커맨드
+
+* `ansible all -m ping`
+* `anslble all -m shell -a "systemctl restart <서비스>"`
+* `ansible all -m copy -a "src=/etc/hosts dest=/etc/hosts`
+* `ansible all -m yum -a "name=httpd state=present" --become`
+* ``
+* ``
+* ``
+* ``
+* ``
+* 
