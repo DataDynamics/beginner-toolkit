@@ -1,5 +1,82 @@
 # Linux
 
+## 서비스 관리 (수동)
+
+systemd가 아닌 스크립트를 통해 관리하기 위한 방법
+
+### Start
+
+```shell
+#!/bin/sh
+
+APP_NAME="watcher.py"
+CONFIG="config.yaml"
+PID_FILE="app.pid"
+LOG_FILE="console.log"
+
+# Check if already running
+if [ -f "$PID_FILE" ]; then
+    PID=$(cat "$PID_FILE")
+    if ps -p $PID > /dev/null; then
+        echo "Application already running with PID $PID"
+        exit 1
+    fi
+fi
+
+# Start the application in background
+nohup python3 "$APP_NAME" --config="$CONFIG" > "$LOG_FILE" 2>&1 &
+PID=$!
+echo $PID > "$PID_FILE"
+echo "Started $APP_NAME with PID $PID"
+```
+
+### Stop
+
+```shell
+#!/bin/sh
+
+PID_FILE="app.pid"
+
+if [ ! -f "$PID_FILE" ]; then
+    echo "No PID file found. Is the app running?"
+    exit 1
+fi
+
+PID=$(cat "$PID_FILE")
+
+if ps -p $PID > /dev/null; then
+    echo "Stopping application with PID $PID"
+    kill $PID
+    rm "$PID_FILE"
+else
+    echo "No process found with PID $PID"
+    rm "$PID_FILE"
+fi
+```
+
+### Status
+
+```shell
+#!/bin/sh
+
+PID_FILE="app.pid"
+
+if [ ! -f "$PID_FILE" ]; then
+    echo "Application is not running (no PID file found)."
+    exit 1
+fi
+
+PID=$(cat "$PID_FILE")
+
+if ps -p $PID > /dev/null; then
+    echo "Application is running with PID $PID."
+    exit 0
+else
+    echo "Application is not running (stale PID file found)."
+    exit 1
+fi
+```
+
 ## `lsof`
 
 lsof는 List Open Files의 약자로, 리눅스 및 유닉스 계열 시스템에서 열린 파일(파일 디스크립터)을 확인할 수 있는 강력한 명령어입니다. 
