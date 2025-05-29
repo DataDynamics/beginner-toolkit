@@ -73,9 +73,5 @@ db01 ansible_host=192.168.1.201 ansible_port=2222 ansible_user=postgres
 * `anslble all -m shell -a "systemctl restart <서비스>"`
 * `ansible all -m copy -a "src=/etc/hosts dest=/etc/hosts`
 * `ansible all -m yum -a "name=httpd state=present" --become`
-* ``
-* ``
-* ``
-* ``
-* ``
-* 
+* `ansible all -m shell -a 'ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa <<< y' --become-user=$USER`
+* `ansible all -m authorized_key -a "user=$USER key='{{ lookup(\"file\", \"$HOME/.ssh/id_rsa.pub\") }}'" --become-user=$USER`
