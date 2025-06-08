@@ -2,6 +2,8 @@
 
 ## 사용자 정보 영구 저장
 
+사용자 정보를 영구 저장하고, Git Push 등 수행시 재인증을 하지 않도록 하는 방법
+
 ```
 git config --global user.name 홍길동
 git config --global user.email honggildong@gmail.com
