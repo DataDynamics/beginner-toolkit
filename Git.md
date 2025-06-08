@@ -92,7 +92,8 @@ git revert --no-edit HEAD
 | 명령어	| 주 사용 상황 | 특징 | 
 |-------|-------------|------|
 | `git rm`	| Git으로 관리하는 파일 삭제	 | 실제 파일과 Git 추적을 동시에 제거 | 
-| `git checkout -- <file>` `git restore <file>`	 | 커밋 전, 파일 수정 내용 취소	 | 마지막 커밋 상태로 파일 복원 (복구 불가) | 
+| `git checkout -- <file>` 
+`git restore <file>`	 | 커밋 전, 파일 수정 내용 취소	 | 마지막 커밋 상태로 파일 복원 (복구 불가) | 
 | `git clean`	| 추적하지 않는(untracked) 파일 삭제	 | 빌드 산출물 등 정리 시 유용 | 
 | `git reset`	| 로컬 커밋 되돌리기 (push 전)	 | 커밋 히스토리를 과거로 되돌림 (강제성) | 
 | `git revert`	| 원격 커밋 되돌리기 (push 후)	 | 되돌리는 내용을 담은 새 커밋을 생성 (안전함) | 
