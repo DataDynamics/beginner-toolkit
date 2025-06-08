@@ -15,6 +15,7 @@ git config --global credential.helper store
 | 커맨드             | 설명                         | 예시                                         |
 |-------------------|------------------------------|----------------------------------------------|
 | `git clone <URL>` | Git Repository를 clone합니다. | `git clone https://github.com/user/repo.git` |
+| `git add .`       | 변경된 파일을 다음 커밋에 포함시키기 위해 스테이징 영역에 추가 | `git add .` `git add -m README.md`|
 | `git commit -m`   | 변경사항을 커밋합니다. | `git commit -m "Controller 추가"` |
 | `git push`        | 커밋한 변경사항을 Git Repository에 push합니다. | `git push` |
 | `git pull`        | 변경사항을 가져와서 병합니다. | `git pull` |
