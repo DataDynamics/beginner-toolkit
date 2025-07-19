@@ -340,6 +340,51 @@ StandardError=append:/var/log/myapp.log
 WantedBy=multi-user.target
 ```
 
+```
+[Unit]
+Description=Spring Boot Application - MyApp
+After=network.target
+
+[Service]
+User=springuser
+WorkingDirectory=/opt/myapp
+
+# 환경변수 파일 지정 (예: /etc/myapp/myapp.env)
+EnvironmentFile=/etc/myapp/myapp.env
+
+# 실행 명령
+ExecStart=/usr/bin/java -jar /opt/myapp/myapp.jar
+
+# 최대 open file 수 설정
+LimitNOFILE=65535
+
+# Java 앱의 종료 코드 143은 SIGTERM 처리시 사용됨
+SuccessExitStatus=143
+
+# 재시작 정책
+Restart=on-failure
+RestartSec=5
+
+# 로그 설정 (journal 사용시)
+StandardOutput=journal
+StandardError=journal
+
+# 로그 설정 (파일)
+# StandardOutput=append:/var/log/myapp_stdout.log
+# StandardError=append:/var/log/myapp_stderr.log
+
+[Install]
+WantedBy=multi-user.target
+```
+
+환경변수 파일을 별도로 지정하는 경우 다음과 같이 작성합니다.
+
+```
+# 환경 변수 예시
+SPRING_PROFILES_ACTIVE=prod
+JAVA_OPTS=-Xms512m -Xmx2g -Dfile.encoding=UTF-8
+```
+
 #### Python Application
 
 ```
