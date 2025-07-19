@@ -324,24 +324,6 @@ sudo systemctl reboot
 
 ```
 [Unit]
-Description=Spring Boot Application - myapp
-After=network.target
-
-[Service]
-User=springuser
-ExecStart=/usr/bin/java -jar /opt/myapp/myapp.jar
-SuccessExitStatus=143
-Restart=on-failure
-RestartSec=10
-StandardOutput=append:/var/log/myapp.log
-StandardError=append:/var/log/myapp.log
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```
-[Unit]
 Description=Spring Boot Application - MyApp
 After=network.target
 
