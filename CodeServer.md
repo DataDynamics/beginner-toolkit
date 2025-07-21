@@ -2,6 +2,11 @@
 
 Visual Studio Code Server는 RHEL/CentOS/Ubuntu 환경에서 원격에서 웹 브라우저를 기반으로 편집 등이 가능하므로 개발 환경 구성시 장점이 많이 발생하나 보안 문제가 발생할 수 있습니다.
 
+- [Visual Studio Code Server](#visual-studio-code-server)
+  - [Install](#install)
+  - [Systemd 등록](#systemd-등록)
+  - [Configuration](#configuration)
+
 ## Install
 
 https://github.com/coder/code-server/releases 에서 OS에 맞는 바이너리를 다운로드드합니다.
