@@ -1,15 +1,14 @@
 # Version Control System
 
-- [Version Control System](#version-control-system)
-  - [Gitea](#gitea)
-  - [Subversion](#subversion)
-    - [구성 방법](#구성-방법)
-    - [설치](#설치)
-      - [Subversion Server](#subversion-server)
-      - [Apache HTTP + mod\_dav\_svn](#apache-http--mod_dav_svn)
-    - [Subversion Repository 구조](#subversion-repository-구조)
-    - [커맨드 요약](#커맨드-요약)
-    - [Subversion Client](#subversion-client)
+- [Gitea](#gitea)
+- [Subversion](#subversion)
+  - [구성 방법](#구성-방법)
+  - [설치](#설치)
+    - [Subversion Server](#subversion-server)
+    - [Apache HTTP + mod\_dav\_svn](#apache-http--mod_dav_svn)
+  - [Subversion Repository 구조](#subversion-repository-구조)
+  - [커맨드 요약](#커맨드-요약)
+  - [Subversion Client](#subversion-client)
 
 ## Gitea
 
