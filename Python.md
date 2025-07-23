@@ -46,3 +46,83 @@ Dog.create_dog("Buddy")  # Creating a new Canine named Buddy
 
 `cls`는 Dog 클래스를 참조합니다. 이를 통해 클래스 변수에 접근하거나, 클래스의 생성자를 호출할 수 있습니다.
 
+## 모듈화
+
+프로젝트의 규모가 커지거나, 역할에 따라서 기능이 잘 분리되어 있을때 재사용을 위해서 모듈화 형태로 설계할 수 있습니다.
+Python 코드를 모듈화하고 import로 불러와 재사용하려면, 디렉토리 구조를 설계하고 __init__.py, 모듈 파일 분리, 패키지화 등의 과정을 따라야 합니다. 아래는 Python 프로젝트를 모듈화하고 import 가능하게 구조화하는 방법에 대해서 알아봅니다.
+
+### 기본 용어
+
+* 모듈(Module): `.py` 파일 하나가 하나의 모듈입니다.
+* 패키지(Package): `__init__.py`가 있는 디렉토리 → 여러 모듈을 포함할 수 있음.
+* `import`: 다른 파일에 정의된 함수, 클래스, 변수 등을 가져오기 위한 문법.
+
+### 디렉토리 구조
+
+```
+myproject/
+│
+├── main.py                    ← 실행 파일
+├── requirements.txt
+├── utils/
+│   ├── __init__.py            ← 패키지로 인식시키는 파일
+│   ├── file_utils.py          ← 모듈
+│   └── math_utils.py          ← 모듈
+├── models/
+│   ├── __init__.py
+│   └── linear_model.py
+```
+
+### 모듈의 정의
+
+`utils/file_utils.py` 파일을 다음과 같이 생성할 수 있습니다.
+
+```python
+def read_file(path):
+    with open(path, 'r') as f:
+        return f.read()
+```
+
+`utils/math_utils.py` 파일을 다음과 같이 생성할 수 있습니다.
+
+```python
+def add(a, b):
+    return a + b
+```
+
+### Import
+
+다음은 개별 모듈의 함수를 import할 수 있습니다.
+
+```python
+from utils.file_utils import read_file
+from utils.math_utils import add
+
+print(read_file("data.txt"))
+print(add(10, 5))
+```
+
+다음과 같이 디렉토리를 통으로 import할 수 있습니다.
+
+```python
+import utils.math_utils as mu
+print(mu.add(2, 3))
+```
+
+### __init__.py의 역할
+
+* Python 3.3 이상에서는 필수는 아니지만, 하위 호환성과 명시적인 패키지 인식을 위해 `__init__.py`는 넣는 것이 좋습니다.
+* `__init__.py` 내부에서 모듈을 미리 `import` 해두면 편하게 쓸 수 있습니다:
+
+`utils/__init__.py` 파일에 다음을 추가합니다.
+
+```python
+from .file_utils import read_file
+from .math_utils import add
+```
+
+그러면 다음과 같이 사용할 수 있습니다.
+
+```python
+from utils import read_file, add
+```
