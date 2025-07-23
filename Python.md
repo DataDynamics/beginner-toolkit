@@ -1,5 +1,26 @@
 # Python Language
 
+## main()
+
+Java의 main 메소드 처럼 Python에서도 다음과 같이 main 함수를 추가할 수 있습니다.
+
+```python
+def main():
+    print("Hello from main!")
+
+if __name__ == "__main__":
+    main()
+```
+
+이제 다음과 같이 실행할 수 있습니다.
+
+```shell
+$ python myscript.py
+# 출력: Hello from main!
+```
+
+main 함수를 지정하지 않더라도 실행은 가능하다 import를 하게 되면 코드가 실행이 될 수 있기 때문에 재사용을 목적으로 구조화 시킨다면 main 함수를 통해서 실행하는 것이 좀더 바람직합니다.
+
 ## self, cls
 
 `self`, `cls`는 자기 자신을 참고하는 용도로 사용
