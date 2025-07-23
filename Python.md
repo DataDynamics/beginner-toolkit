@@ -126,3 +126,46 @@ from .math_utils import add
 ```python
 from utils import read_file, add
 ```
+
+## PYTHONPATH
+
+* `PYTHONPATH`는 Python 인터프리터가 모듈을 찾을 때 참조하는 경로 목록에 영향을 주는 환경 변수입니다. 쉽게 말해, Python이 import 시에 어디서 모듈을 찾아야 하는지를 지정하는 방법입니다.
+* 기본적으로 Python은 표준 라이브러리나 `site-packages`와 같은 기본 경로에서 모듈을 찾습니다.
+* 그러나 사용자 정의 모듈이나 외부 디렉토리에 있는 모듈을 불러오고 싶을 때, 해당 디렉토리를 `PYTHONPATH`에 추가하면 됩니다.
+
+### PYTHONPATH 동작 순서
+
+1.	현재 실행 중인 스크립트의 디렉토리
+2.	`PYTHONPATH`에 설정된 경로 (환경 변수)
+3.	Python의 표준 라이브러리 경로
+4.	`site-packages` 경로 등
+
+경로 목록을 확인하려면 다음의 코드를 실행할 수 있습니다.
+
+```python
+import sys
+print(sys.path)
+```
+
+### PYTHONPATH 설정 방법
+
+```
+export PYTHONPATH=/your/custom/path
+python script.py
+```
+다음과 같이 동적으로 스크립트 디렉토리를 추가할 수 있습니다.
+
+```
+# main.py
+import sys
+sys.path.append("./mylib")
+
+from mymodule import some_function
+```
+
+
+
+
+
+
+
